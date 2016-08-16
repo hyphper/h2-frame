@@ -11,6 +11,8 @@
  */
 class FlagsTest extends PHPUnit_Framework_TestCase
 {
+    const VALID_FLAG = 0x00;
+
     public function testFlags()
     {
         $flags = new \Hyphper\Frame\Flags(
@@ -29,7 +31,6 @@ class FlagsTest extends PHPUnit_Framework_TestCase
     public function testInvalidFlagsNoValid()
     {
         $flags = new \Hyphper\Frame\Flags();
-
         $flags->add(\Hyphper\Frame\Flag::ACK);
     }
 
@@ -44,6 +45,47 @@ class FlagsTest extends PHPUnit_Framework_TestCase
             \Hyphper\Frame\Flag::END_HEADERS
         );
 
+        $flags->add(\Hyphper\Frame\Flag::ACK);
+    }
+
+    /**
+     * From hyperframe
+     */
+
+    public function testAdd()
+    {
+
+        $flags = new \Hyphper\Frame\Flags(self::VALID_FLAG);
+        $this->assertEquals([], $flags->getIterator());
+
+        $flags->add(self::VALID_FLAG);
+        $flags->add(self::VALID_FLAG);
+
+        $this->assertArrayHasKey(self::VALID_FLAG, $flags->getIterator());
+        $this->assertEquals([self::VALID_FLAG => self::VALID_FLAG], $flags->getIterator());
+        $this->assertCount(1, $flags);
+    }
+
+    public function testRemove()
+    {
+        $flags = new \Hyphper\Frame\Flags(self::VALID_FLAG);
+        $flags->add(self::VALID_FLAG);
+        $flags->remove(self::VALID_FLAG);
+        $this->assertArrayNotHasKey(self::VALID_FLAG, $flags->getIterator());
+        $this->assertEquals([], $flags->getIterator());
+        $this->assertCount(0, $flags);
+
+        $this->assertNull($flags->remove(\Hyphper\Frame\Flag::END_STREAM));
+    }
+
+    /**
+     * @expectedException \Hyphper\Frame\Exception\InvalidFlagException
+     * @expectedExceptionMessage Unexpected flag: 0x01. Valid flags are: 0x00
+     */
+    public function testValidation()
+    {
+        $flags = new \Hyphper\Frame\Flags(self::VALID_FLAG);
+        $flags->add(self::VALID_FLAG);
         $flags->add(\Hyphper\Frame\Flag::ACK);
     }
 }
