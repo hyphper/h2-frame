@@ -295,7 +295,7 @@ abstract class Frame
 
         return [sprintf(
             "%s(Stream: %s; Flags: %s): %s",
-            end(explode("\\", static::class)),
+            substr(strrchr(static::class, '\\'), 1),
             $this->stream_id ?? "None",
             $flags,
             $body
