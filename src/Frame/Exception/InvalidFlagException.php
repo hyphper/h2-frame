@@ -9,7 +9,8 @@ class InvalidFlagException extends \Exception
      * @param string $flag
      * @param int $valid_flags
      */
-    public function __construct($flag, $valid_flags) {
+    public function __construct($flag, $valid_flags)
+    {
         parent::__construct(
             sprintf(
                 "Unexpected flag: 0x%02x. Valid flags are: %s",

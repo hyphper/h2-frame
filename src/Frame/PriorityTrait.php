@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 namespace Hyphper\Frame;
 
 /**
@@ -14,7 +14,8 @@ trait PriorityTrait
     protected $stream_weight;
     protected $exclusive;
 
-    public function __construct(array $options = []) {
+    public function __construct(array $options = [])
+    {
         parent::__construct($options);
         $this->depends_on = (int) ($options['depends_on'] ?? 0);
         $this->stream_weight = (int) ($options['stream_weight'] ?? 0);

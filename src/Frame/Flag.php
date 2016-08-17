@@ -2,7 +2,6 @@
 declare(strict_types=1);
 namespace Hyphper\Frame;
 
-
 class Flag
 {
     const END_STREAM = 0x01;

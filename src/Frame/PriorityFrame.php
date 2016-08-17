@@ -38,4 +38,5 @@ class PriorityFrame extends \Hyphper\Frame implements PriorityInterface
     {
         $this->parsePriorityData($data);
         $this->body_len = strlen($data);
-    }}
+    }
+}

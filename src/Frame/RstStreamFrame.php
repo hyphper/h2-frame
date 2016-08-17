@@ -55,8 +55,8 @@ class RstStreamFrame extends \Hyphper\Frame
         if (strlen($data) != 4) {
             throw new InvalidFrameException(sprintf(
                 "RST_STREAM must have 4 byte body: actual length %s.",
-                strlen($data))
-            );
+                strlen($data)
+            ));
         }
 
         if (!$unpack = @unpack('Nerror_code', $data)) {

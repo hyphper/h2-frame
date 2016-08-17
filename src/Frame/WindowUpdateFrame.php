@@ -8,7 +8,7 @@ use Hyphper\Frame\Exception\InvalidFrameException;
  * The WINDOW_UPDATE frame is used to implement flow control.
  * Flow control operates at two levels: on each individual stream and on the
  * entire connection.
- * 
+ *
  * Both types of flow control are hop by hop; that is, only between the two
  * endpoints. Intermediaries do not forward WINDOW_UPDATE frames between
  * dependent connections. However, throttling of data transfer by any receiver

@@ -59,7 +59,10 @@ class DataFrame extends \Hyphper\Frame implements PaddingInterface
     public function parseBody(string $data)
     {
         $padding_data_length = $this->parsePaddingData($data);
-        $this->data = substr($data, $padding_data_length, ($this->padding_length) ? $this->padding_length * -1 : strlen($data));
+        $this->data = $data;
+        if ($this->padding_length) {
+            $this->data = substr($data, $padding_data_length, $this->padding_length * -1);
+        }
 
         $this->body_len = strlen($data);
         if ($this->padding_length && $this->padding_length >= $this->body_len) {

@@ -12,10 +12,8 @@ namespace Hyphper;
 
 use Hyphper\Frame\Flags;
 
-use Hyphper\Frame\Exception\{
-    InvalidFrameException,
-    UnknownFrameException
-};
+use Hyphper\Frame\Exception\InvalidFrameException;
+use Hyphper\Frame\Exception\UnknownFrameException;
 
 /**
  * The base class for all HTTP/2 frames.
@@ -120,7 +118,7 @@ abstract class Frame
      * @throws InvalidFrameException
      * @throws UnknownFrameException
      */
-    static public function parseFrame($data): Frame
+    public static function parseFrame($data): Frame
     {
         $frame = static::parseFrameHeader(substr($data, 0, 9));
         $length = $frame->getLength();
@@ -138,7 +136,7 @@ abstract class Frame
      * @param string $header
      * @throws UnknownFrameException If a frame of unknown type is received.
      */
-    static public function parseFrameHeader(string $header): Frame
+    public static function parseFrameHeader(string $header): Frame
     {
         /*
          * H = unsigned 16bit int = n

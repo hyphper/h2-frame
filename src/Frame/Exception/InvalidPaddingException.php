@@ -8,5 +8,4 @@ namespace Hyphper\Frame\Exception;
  */
 class InvalidPaddingException extends \Exception
 {
-
 }

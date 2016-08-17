@@ -8,5 +8,4 @@ namespace Hyphper\Frame\Exception;
  */
 class InvalidFrameException extends \Exception
 {
-
 }
