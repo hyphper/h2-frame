@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Hyphper\Frame;
 
 use Hyphper\Frame\Exception\InvalidFrameException;
@@ -49,9 +50,9 @@ class GoAwayFrame extends \Hyphper\Frame
      *
      * @param string $data
      *
-     * @return string
+     * @return void
      */
-    public function parseBody(string $data): string
+    public function parseBody(string $data)
     {
         if (!$unpack = @unpack('Nlast_stream_id/Nerror_code', substr($data, 0, 8))) {
             throw new InvalidFrameException('Invalid GOAWAY body.');
@@ -64,8 +65,6 @@ class GoAwayFrame extends \Hyphper\Frame
         if (strlen($data) > 8) {
             $this->additional_data = substr($data, 8);
         }
-
-        return $data;
     }
 
     /**

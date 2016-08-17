@@ -91,6 +91,11 @@ abstract class Frame
      */
     protected $body_len = 0;
 
+    /**
+     * Frame constructor.
+     *
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
         $this->stream_id = $options['stream_id'] ?? 0;
@@ -113,6 +118,13 @@ abstract class Frame
         }
     }
 
+    /**
+     * @param $data
+     *
+     * @return Frame
+     * @throws InvalidFrameException
+     * @throws UnknownFrameException
+     */
     static public function parseFrame($data): Frame
     {
         $frame = static::parseFrameHeader(substr($data, 0, 9));
@@ -206,7 +218,13 @@ abstract class Frame
         return $header . $body;
     }
 
-    public function parseFlags($flag_byte): Flags
+    /**
+     * @param $flag_byte
+     *
+     * @return Flags
+     * @throws Frame\Exception\InvalidFlagException
+     */
+    public function parseFlags(int $flag_byte): Flags
     {
         foreach ($this->defined_flags as $flag) {
             if ($flag_byte & $flag) {
@@ -226,9 +244,9 @@ abstract class Frame
      *
      *
      * @param string $data
-     * @return string
+     * @return void
      */
-    abstract public function parseBody(string $data): string;
+    abstract public function parseBody(string $data);
 
     /**
      * @return Flags

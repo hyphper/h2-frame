@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Hyphper\Frame;
 
 /**
@@ -18,6 +19,11 @@ class ContinuationFrame extends \Hyphper\Frame
     protected $stream_association = self::HAS_STREAM;
     protected $data;
 
+    /**
+     * ContinuationFrame constructor.
+     *
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
         parent::__construct($options);
@@ -25,6 +31,9 @@ class ContinuationFrame extends \Hyphper\Frame
         $this->data = $options['data'] ?? '';
     }
 
+    /**
+     * @return string
+     */
     public function serializeBody(): string
     {
         return $this->data;
@@ -38,14 +47,12 @@ class ContinuationFrame extends \Hyphper\Frame
      *
      * @param string $data
      *
-     * @return string
+     * @return void
      */
-    public function parseBody(string $data): string
+    public function parseBody(string $data)
     {
         $this->data = $data;
         $this->body_len = strlen($data);
-
-        return $this->data;
     }
 
     /**

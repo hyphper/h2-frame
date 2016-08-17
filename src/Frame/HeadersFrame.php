@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Hyphper\Frame;
 
 use Hyphper\Frame\Exception\InvalidPaddingException;
@@ -44,7 +45,10 @@ class HeadersFrame extends \Hyphper\Frame implements PaddingInterface, PriorityI
     public function serializeBody(): string
     {
         $padding_data = $this->serializePaddingData();
-        $padding = str_repeat("\0", $this->padding_length);
+        $padding = '';
+        if ($this->padding_length) {
+            $padding = str_repeat("\0", $this->padding_length);
+        }
 
         $priority_data = '';
         if ($this->flags->hasFlag(Flag::PRIORITY)) {
@@ -62,9 +66,9 @@ class HeadersFrame extends \Hyphper\Frame implements PaddingInterface, PriorityI
      *
      * @param string $data
      *
-     * @return string
+     * @return void
      */
-    public function parseBody(string $data): string
+    public function parseBody(string $data)
     {
         $padding_data_length = $this->parsePaddingData($data);
         $data = substr($data, $padding_data_length);
@@ -80,8 +84,6 @@ class HeadersFrame extends \Hyphper\Frame implements PaddingInterface, PriorityI
         if ($this->padding_length && $this->padding_length >= $this->body_len) {
             throw new InvalidPaddingException('Padding is too long');
         }
-
-        return $this->data;
     }
 
     /**

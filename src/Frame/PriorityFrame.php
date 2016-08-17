@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Hyphper\Frame;
 
 /**
@@ -13,12 +14,12 @@ class PriorityFrame extends \Hyphper\Frame implements PriorityInterface
     use PriorityTrait;
 
     protected $defined_flags = [];
-
     protected $type = 0x02;
-
     protected $stream_association = self::HAS_STREAM;
 
-
+    /**
+     * @return string
+     */
     public function serializeBody(): string
     {
         return $this->serializePriorityData();
@@ -31,12 +32,10 @@ class PriorityFrame extends \Hyphper\Frame implements PriorityInterface
      *
      * @param string $data
      *
-     * @return string
+     * @return void
      */
-    public function parseBody(string $data): string
+    public function parseBody(string $data)
     {
         $this->parsePriorityData($data);
         $this->body_len = strlen($data);
-
-        return $data;
     }}

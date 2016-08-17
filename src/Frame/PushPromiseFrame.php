@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Hyphper\Frame;
 
 use Hyphper\Frame\Exception\InvalidFrameException;
@@ -39,7 +40,10 @@ class PushPromiseFrame extends \Hyphper\Frame implements PaddingInterface
     public function serializeBody(): string
     {
         $padding_data = $this->serializePaddingData();
-        $padding = str_repeat("\0", $this->padding_length);
+        $padding = '';
+        if ($this->padding_length) {
+            $padding = str_repeat("\0", $this->padding_length);
+        }
         $data = pack('N', $this->promised_stream_id);
 
         return $padding_data . $data . $this->data . $padding;
@@ -54,9 +58,9 @@ class PushPromiseFrame extends \Hyphper\Frame implements PaddingInterface
      * @param string $data
      * @throws InvalidFrameException
      * @throws InvalidPaddingException
-     * @return string
+     * @return void
      */
-    public function parseBody(string $data): string
+    public function parseBody(string $data)
     {
         $padding_data_length = $this->parsePaddingData($data);
 
@@ -72,8 +76,6 @@ class PushPromiseFrame extends \Hyphper\Frame implements PaddingInterface
         if ($this->padding_length && $this->padding_length > $this->body_len) {
             throw new InvalidPaddingException('Padding is too long');
         }
-
-        return $this->data;
     }
 
     /**

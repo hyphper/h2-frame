@@ -11,6 +11,12 @@ class UnknownFrameException extends \Exception
     protected $frame_type;
     protected $length;
 
+    /**
+     * UnknownFrameException constructor.
+     *
+     * @param string $frame_type
+     * @param int $length
+     */
     public function __construct($frame_type, $length)
     {
         $this->frame_type = $frame_type;

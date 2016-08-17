@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Hyphper\Frame;
 
 use Hyphper\Frame\Exception\InvalidFrameException;
@@ -55,8 +56,7 @@ class SettingsFrame extends \Hyphper\Frame
     /**
      * SettingsFrame constructor.
      *
-     * @param array $settings
-     * @param array ...$args
+     * @param array $options
      * @throws InvalidFrameException
      */
     public function __construct(array $options = []) // array $settings = [], ... $args)
@@ -72,6 +72,9 @@ class SettingsFrame extends \Hyphper\Frame
         $this->settings = $options['settings'];
     }
 
+    /**
+     * @return string
+     */
     public function serializeBody(): string
     {
         $settings = [];
@@ -90,12 +93,12 @@ class SettingsFrame extends \Hyphper\Frame
      *
      * @param string $data
      * @throws InvalidFrameException
-     * @return string
+     * @return void
      */
-    public function parseBody(string $data): string
+    public function parseBody(string $data)
     {
         foreach (range(0, strlen($data) - 1, 6) as $i) {
-            if (!$unpack = @unpack('nname/Nvalue', substr($data, $i, $i+6))) {
+            if (!$unpack = @unpack('nname/Nvalue', substr($data, $i, $i + 6))) {
                 throw new InvalidFrameException('Invalid SETTINGS body');
             }
 
@@ -105,8 +108,6 @@ class SettingsFrame extends \Hyphper\Frame
         }
 
         $this->body_len = strlen($data);
-
-        return $data;
     }
 
     /**

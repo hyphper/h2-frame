@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Hyphper\Frame;
 
 use Hyphper\Frame\Exception\InvalidFrameException;
@@ -27,6 +28,11 @@ class AltSvcFrame extends \Hyphper\Frame
     protected $origin;
     protected $field;
 
+    /**
+     * AltSvcFrame constructor.
+     *
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
         parent::__construct($options);
@@ -34,6 +40,9 @@ class AltSvcFrame extends \Hyphper\Frame
         $this->field = $options['field'] ?? '';
     }
 
+    /**
+     * @return string
+     */
     public function serializeBody(): string
     {
         $origin_len = pack('n', strlen($this->origin));
@@ -47,10 +56,9 @@ class AltSvcFrame extends \Hyphper\Frame
      *
      *
      * @param string $data
-     *
-     * @return string
+     * @return void
      */
-    public function parseBody(string $data): string
+    public function parseBody(string $data)
     {
         if (!$unpack = @unpack('norigin_length', substr($data, 0, 2))) {
             throw new InvalidFrameException('Invalid ALTSVC frame body.');
@@ -66,8 +74,6 @@ class AltSvcFrame extends \Hyphper\Frame
         $this->field = substr($data, 2 + $origin_length);
 
         $this->body_len = strlen($data);
-
-        return $data;
     }
 
     /**

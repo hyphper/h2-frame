@@ -3,6 +3,12 @@ namespace Hyphper\Frame\Exception;
 
 class InvalidFlagException extends \Exception
 {
+    /**
+     * InvalidFlagException constructor.
+     *
+     * @param string $flag
+     * @param int $valid_flags
+     */
     public function __construct($flag, $valid_flags) {
         parent::__construct(
             sprintf(
@@ -13,6 +19,11 @@ class InvalidFlagException extends \Exception
         );
     }
 
+    /**
+     * @param $valid_flags
+     *
+     * @return string
+     */
     protected function getValidFlags($valid_flags)
     {
         $flags = [];

@@ -17,6 +17,11 @@ class PingFrame extends \Hyphper\Frame
     protected $stream_association = self::NO_STREAM;
     protected $opaque_data;
 
+    /**
+     * PingFrame constructor.
+     *
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
         parent::__construct($options);
@@ -24,7 +29,10 @@ class PingFrame extends \Hyphper\Frame
         $this->opaque_data = $options['opaque_data'] ?? '';
     }
 
-
+    /**
+     * @return string
+     * @throws InvalidFrameException
+     */
     public function serializeBody(): string
     {
         if (strlen($this->opaque_data) > 8) {
@@ -47,9 +55,9 @@ class PingFrame extends \Hyphper\Frame
      *
      * @param string $data
      *
-     * @return string
+     * @return void
      */
-    public function parseBody(string $data): string
+    public function parseBody(string $data)
     {
         if (strlen($data) != 8) {
             throw new InvalidFrameException(
@@ -59,8 +67,6 @@ class PingFrame extends \Hyphper\Frame
 
         $this->opaque_data = $data;
         $this->body_len = strlen($data);
-
-        return $data;
     }
 
     /**

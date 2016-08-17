@@ -24,12 +24,20 @@ class DataFrame extends \Hyphper\Frame implements PaddingInterface
     protected $stream_association = self::HAS_STREAM;
     protected $data;
 
+    /**
+     * DataFrame constructor.
+     *
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
         parent::__construct($options);
         $this->data = $options['data'] ?? '';
     }
 
+    /**
+     * @return string
+     */
     public function serializeBody(): string
     {
         $padding_data = $this->serializePaddingData();
@@ -46,9 +54,9 @@ class DataFrame extends \Hyphper\Frame implements PaddingInterface
      *
      * @param string $data
      *
-     * @return string
+     * @return void
      */
-    public function parseBody(string $data): string
+    public function parseBody(string $data)
     {
         $padding_data_length = $this->parsePaddingData($data);
         $this->data = substr($data, $padding_data_length, ($this->padding_length) ? $this->padding_length * -1 : strlen($data));
@@ -57,8 +65,6 @@ class DataFrame extends \Hyphper\Frame implements PaddingInterface
         if ($this->padding_length && $this->padding_length >= $this->body_len) {
             throw new \Hyphper\Frame\Exception\InvalidPaddingException("Padding is too long.");
         }
-
-        return $this->data;
     }
 
     /**

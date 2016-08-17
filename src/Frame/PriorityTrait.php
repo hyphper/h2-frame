@@ -95,7 +95,7 @@ trait PriorityTrait
         if ($unpack = @unpack('Ndepends_on/Cstream_weight', substr($data, 0, 5))) {
             $this->depends_on = $unpack['depends_on'];
             $this->stream_weight = $unpack['stream_weight'];
-            $this->exclusive = (bool)($this->depends_on & PriorityInterface::MASK);
+            $this->exclusive = (bool) ($this->depends_on & PriorityInterface::MASK);
             $this->depends_on &= ~PriorityInterface::MASK;
 
             return 5;

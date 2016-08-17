@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Hyphper\Frame;
 
 use Hyphper\Frame\Exception\InvalidFrameException;
@@ -20,12 +21,20 @@ class RstStreamFrame extends \Hyphper\Frame
     protected $stream_association = self::HAS_STREAM;
     protected $error_code;
 
+    /**
+     * RstStreamFrame constructor.
+     *
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
         parent::__construct($options);
         $this->error_code = (int) ($options['error_code'] ?? null);
     }
 
+    /**
+     * @return string
+     */
     public function serializeBody(): string
     {
         return pack('N', $this->error_code);
@@ -39,9 +48,9 @@ class RstStreamFrame extends \Hyphper\Frame
      *
      * @param string $data
      *
-     * @return string
+     * @return void
      */
-    public function parseBody(string $data): string
+    public function parseBody(string $data)
     {
         if (strlen($data) != 4) {
             throw new InvalidFrameException(sprintf(
@@ -56,8 +65,6 @@ class RstStreamFrame extends \Hyphper\Frame
 
         $this->error_code = $unpack['error_code'];
         $this->body_len = strlen($data);
-
-        return $data;
     }
 
     /**

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace Hyphper\Frame;
 
 use Hyphper\Frame\Exception\InvalidFrameException;
@@ -23,6 +24,11 @@ class WindowUpdateFrame extends \Hyphper\Frame
     protected $stream_association = self::EITHER_STREAM;
     protected $window_increment;
 
+    /**
+     * WindowUpdateFrame constructor.
+     *
+     * @param array $options
+     */
     public function __construct(array $options = [])
     {
         parent::__construct($options);
@@ -30,6 +36,9 @@ class WindowUpdateFrame extends \Hyphper\Frame
         $this->window_increment = $options['window_increment'] ?? 0;
     }
 
+    /**
+     * @return string
+     */
     public function serializeBody(): string
     {
         return pack('N', $this->window_increment & 0x7FFFFFFF);
@@ -43,9 +52,9 @@ class WindowUpdateFrame extends \Hyphper\Frame
      *
      * @param string $data
      *
-     * @return string
+     * @return void
      */
-    public function parseBody(string $data): string
+    public function parseBody(string $data)
     {
         if (!$unpack = @unpack('Nwindow_increment', $data)) {
             throw new InvalidFrameException('Invalid WINDOW_UPDATE body');
@@ -53,8 +62,6 @@ class WindowUpdateFrame extends \Hyphper\Frame
 
         $this->window_increment = $unpack['window_increment'];
         $this->body_len = strlen($data);
-
-        return $data;
     }
 
     /**
