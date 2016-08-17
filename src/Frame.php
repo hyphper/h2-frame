@@ -10,15 +10,10 @@ declare(strict_types=1);
 
 namespace Hyphper;
 
-use Hyphper\Frame\{
-    Flag,
-    Flags,
-    DataFrame
-};
+use Hyphper\Frame\Flags;
 
 use Hyphper\Frame\Exception\{
     InvalidFrameException,
-    InvalidPaddingError,
     UnknownFrameException
 };
 
@@ -130,7 +125,7 @@ abstract class Frame
         $frame = static::parseFrameHeader(substr($data, 0, 9));
         $length = $frame->getLength();
 
-        $body = $frame->parseBody(strlen($data, 9, $length));
+        $frame->parseBody(strlen($data, 9, $length));
 
         return $frame;
     }
