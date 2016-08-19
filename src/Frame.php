@@ -99,7 +99,7 @@ abstract class Frame
             $this->flags->add($flag);
         }
 
-    	if ($this->stream_association === self::HAS_STREAM && !$this->stream_id) {
+        if ($this->stream_association === self::HAS_STREAM && !$this->stream_id) {
             throw new InvalidFrameException();
         }
 
