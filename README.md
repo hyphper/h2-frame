@@ -1,4 +1,7 @@
-[![Build Status](https://travis-ci.org/hyphper/h2-frame.svg?branch=master)](https://travis-ci.org/hyphper/h2-frame)
+[![Build Status](https://travis-ci.org/hyphper/h2-frame.svg?branch=master)](https://travis-ci.org/hyphper/h2-frame) | 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/hyphper/h2-frame/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/hyphper/h2-frame/?branch=master) |
+[![Code Coverage](https://scrutinizer-ci.com/g/hyphper/h2-frame/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/hyphper/h2-frame/?branch=master) | 
+
 # hyphperframe/h2-frame: Pure PHP HTTP/2 Framing
 
 This library contains the HTTP/2 framing code used in the [hyphper project](https://github.com/hyphper). It provides a pure-PHP codebase that is capable of decoding a binary stream into HTTP/2 frames.
