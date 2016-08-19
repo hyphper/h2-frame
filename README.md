@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/hyphper/h2-frame.svg?branch=master)](https://travis-ci.org/hyphper/h2-frame) | 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/hyphper/h2-frame/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/hyphper/h2-frame/?branch=master) |
-[![Code Coverage](https://scrutinizer-ci.com/g/hyphper/h2-frame/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/hyphper/h2-frame/?branch=master) | 
+[![Build Status](https://travis-ci.org/hyphper/h2-frame.svg?branch=master)](https://travis-ci.org/hyphper/h2-frame) 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/hyphper/h2-frame/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/hyphper/h2-frame/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/hyphper/h2-frame/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/hyphper/h2-frame/?branch=master) 
 
 # hyphperframe/h2-frame: Pure PHP HTTP/2 Framing
 
