@@ -24,7 +24,7 @@ class AltSvcFrame extends \Hyphper\Frame
 {
     protected $defined_flags = [];
     protected $type = 0xA;
-    protected $stream_association = self::BOTH_STREAM;
+    protected $stream_association = self::EITHER_STREAM;
     protected $origin;
     protected $field;
 

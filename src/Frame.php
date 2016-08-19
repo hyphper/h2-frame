@@ -39,7 +39,6 @@ abstract class Frame
     const HAS_STREAM = 1;
     const NO_STREAM = 2;
     const EITHER_STREAM = 4;
-    const BOTH_STREAM = 8;
 
     /**
      * @var array The flags defined on this type of frame.
@@ -100,14 +99,12 @@ abstract class Frame
             $this->flags->add($flag);
         }
 
-        if ($this->stream_association !== self::EITHER_STREAM && $this->stream_association !== self::BOTH_STREAM) {
-            if ($this->stream_association !== self::NO_STREAM && !$this->stream_id) {
-                throw new InvalidFrameException();
-            }
+    	if ($this->stream_association === self::HAS_STREAM && !$this->stream_id) {
+            throw new InvalidFrameException();
+        }
 
-            if ($this->stream_association === self::NO_STREAM && $this->stream_id) {
-                throw new InvalidFrameException();
-            }
+        if ($this->stream_association === self::NO_STREAM && $this->stream_id) {
+            throw new InvalidFrameException();
         }
     }
 
