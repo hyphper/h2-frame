@@ -4,7 +4,7 @@ namespace Hyphper\Test;
 
 class FrameTest extends \PHPUnit_Framework_TestCase
 {
-    protected function decodeFrame($frame_data)
+    protected function decodeFrame(string $frame_data) : \Hyphper\Frame
     {
         $f = \Hyphper\Frame::parseFrameHeader(substr($frame_data, 0, 9));
         $length = $f->getLength();
