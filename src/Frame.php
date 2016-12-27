@@ -109,13 +109,13 @@ abstract class Frame
     }
 
     /**
-     * @param $data
+     * @param string $data
      *
      * @return Frame
      * @throws InvalidFrameException
      * @throws UnknownFrameException
      */
-    public static function parseFrame($data): Frame
+    public static function parseFrame(string $data): Frame
     {
         $frame = static::parseFrameHeader(substr($data, 0, 9));
         $length = $frame->getLength();
