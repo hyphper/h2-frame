@@ -56,7 +56,6 @@ class FlagsTest extends PHPUnit_Framework_TestCase
 
     public function testAdd()
     {
-
         $flags = new \Hyphper\Frame\Flags(self::VALID_FLAG);
         $this->assertEquals([], $flags->getIterator());
 
