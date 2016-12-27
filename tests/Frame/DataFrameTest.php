@@ -29,8 +29,10 @@ class DataFrameTest extends FrameTest
         $f = $this->decodeFrame($this->payload);
         $this->assertInstanceOf(\Hyphper\Frame\DataFrame::class, $f);
 
-        $this->assertEquals([\Hyphper\Frame\Flag::END_STREAM => \Hyphper\Frame\Flag::END_STREAM],
-            $f->getFlags()->getIterator());
+        $this->assertEquals(
+            [\Hyphper\Frame\Flag::END_STREAM => \Hyphper\Frame\Flag::END_STREAM],
+            $f->getFlags()->getIterator()
+        );
         $this->assertEquals(0, $f->getPaddingLength());
         $this->assertEquals('testdata', $f->getData());
         $this->assertEquals(8, $f->getBodyLen());

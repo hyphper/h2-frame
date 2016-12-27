@@ -1,7 +1,6 @@
 <?php
 namespace Hyphper\Test;
 
-
 class HeadersFrameTest extends FrameTest
 {
     public function testHeadersFrameFlags()
@@ -111,6 +110,4 @@ class HeadersFrameTest extends FrameTest
         $new_frame = $this->decodeFrame($data);
         $this->assertEquals('', $new_frame->getData());
     }
-
-    
 }
